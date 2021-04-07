@@ -14,7 +14,7 @@ const store = createStore(
 const DataProvider = ({children}) => {
     return (
         <Provider store={store}>
-
+            {children}
         </Provider>
     )
 }
