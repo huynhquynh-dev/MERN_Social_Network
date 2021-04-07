@@ -19,7 +19,7 @@ const authController = {
             if (user_email)
                 return res.status(400).json({message: "This email already exists"})
             
-            if (password.maxlength < 6)
+            if (password.length < 6)
                 return res.status(400).json({message: "Password must be at least 6 characters"})
 
             const passwordHash = await bcrypt.hash(password, 12)
@@ -53,7 +53,34 @@ const authController = {
     },
     login: async (req, res) => {
         try {
-            
+            const {email, password} = req.body
+
+            const user = await Users.findOne({email}).populate("followers following", "-password")
+            if (!user) 
+                return res.status(400).json({message: "This email does not exist"})
+
+            const isMatch = await bcrypt.compare(password, user.password)
+            if (!isMatch) 
+                return res.status(400).json({message: "Password is incorrect"})
+
+            const access_token = createAccessToken({id: user._id})
+            const refresh_token = createRefreshToken({id: user._id})
+
+            res.cookie('REFRESH_TOKEN', refresh_token, {
+                httpOnly: true,
+                path: '/api/refresh_token',
+                maxAge: 30*24*60*60*1000
+            })
+
+            res.json({
+                message: "Login successfully",
+                access_token,
+                user: {
+                    ...user._doc,
+                    password: ''
+                }
+            })
+
         } catch (error) {
             return res.status(500).json({message: error.message})
         }
