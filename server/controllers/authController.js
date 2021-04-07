@@ -87,7 +87,9 @@ const authController = {
     },
     logout: async (req, res) => {
         try {
-            
+            res.clearCookie('REFRESH_TOKEN', {path: '/api/refresh_token'})
+
+            return res.json({message: 'Logout successfully'})
         } catch (error) {
             return res.status(500).json({message: error.message})
         }
