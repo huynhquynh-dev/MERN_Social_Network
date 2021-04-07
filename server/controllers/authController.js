@@ -96,7 +96,28 @@ const authController = {
     },
     generateAccessToken: async (req, res) => {
         try {
-            
+            const refresh_token = req.cookies.REFRESH_TOKEN
+            if(!refresh_token)
+                return res.status(400).json({message: "Please login now"})
+
+            jwt.verify(refresh_token, process.env.REFRESH_TOKEN_SECRET, async(error, result) => {
+                if(error)
+                    return res.status(400).json({message: "Please login now"})
+                
+                const user = await Users.findById(result.id)
+                                        .select('-password')
+                                        .populate('followers following', '-password')
+
+                if(!user)
+                    return res.status(400).json({message: "This does not exist"})
+
+                const access_token = createAccessToken({id: result.id})
+                
+                res.json({
+                    access_token,
+                    user
+                })
+            })
         } catch (error) {
             return res.status(500).json({message: error.message})
         }
