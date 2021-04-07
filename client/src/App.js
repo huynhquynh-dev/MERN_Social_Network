@@ -1,8 +1,16 @@
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+
 function App() {
   return (
-    <div className="App">
-		<h1>Hello World</h1>
-    </div>
+    <Router>
+		<input type="checkbox" id="theme"/>
+        <div className="App">
+        	<div className="main">
+				<h1>Hello World</h1>
+			</div>
+        </div>
+    </Router>
+    
   );
 }
 
