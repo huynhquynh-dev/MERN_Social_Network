@@ -23,8 +23,8 @@ const Header = () => {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-between align-middle">
-            <Link className="navbar-brand" to="/">
-                Qudispace
+            <Link to="/">
+                <h1 className="navbar-brand text-uppercase m-0 p-0">Qudispace</h1>
             </Link>
 
         <div className="menu">
