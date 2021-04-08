@@ -52,9 +52,9 @@ const Header = () => {
                         <Link className="dropdown-item" to={`/profile/${auth.user._id}`}>
                             Profile
                         </Link>
-                        <Link className="dropdown-item" to="/">
-                            Dark mode
-                        </Link>
+                        
+                        <label htmlFor="theme" className="dropdown-item">Dark mode</label>
+
                         <div className="dropdown-divider"></div>
                         <Link
                             className="dropdown-item"
