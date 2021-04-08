@@ -5,8 +5,12 @@ import { useDispatch } from "react-redux"
 
 const Login = () => {
   const initialState = { email: "", password: "" };
+  
   const [userData, setUserData] = useState(initialState);
+
   const { email, password } = userData;
+
+  const [typePass, setTypePass] = useState(false)
 
   const dispatch = useDispatch();
 
@@ -38,15 +42,20 @@ const Login = () => {
         </div>
         <div className="form-group">
           <label htmlFor="exampleInputPassword1">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="exampleInputPassword1"
-            placeholder="Your password"
-            onChange={handleChangeInput}
-            value={password}
-            name="password"
-          />
+          <div className="pass">
+            <input
+              type={ typePass ? "text" : "password" }
+              className="form-control"
+              id="exampleInputPassword1"
+              placeholder="Your password"
+              onChange={handleChangeInput}
+              value={password}
+              name="password"
+            />
+            <small onClick={() => setTypePass(!typePass)}>
+              {typePass ? 'Hide' : 'Show'}
+            </small>
+          </div>
         </div>
         <button
           type="submit"
