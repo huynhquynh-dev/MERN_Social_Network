@@ -60,3 +60,39 @@ export const refreshToken = () => async (dispatch) => {
     }
   }
 };
+
+export const register = (data) => async (dispatch) => {
+  console.log(data)
+  try {
+    dispatch({
+      type: GLOBAL_TYPE.ALERT,
+      payload: {
+        loading: true,
+      },
+    });
+
+    const res = await postDataAPI("register", data);
+    dispatch({
+      type: GLOBAL_TYPE.AUTH,
+      payload: {
+        token: res.data.access_token,
+        user: res.data.user,
+      },
+    });
+
+    localStorage.setItem("firstLogin", true);
+    dispatch({
+      type: GLOBAL_TYPE.ALERT,
+      payload: {
+        success: res.data.message,
+      },
+    });
+  } catch (error) {
+    dispatch({
+      type: GLOBAL_TYPE.ALERT,
+      payload: {
+        error: error.response.data.message,
+      },
+    });
+  }
+};
