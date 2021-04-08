@@ -49,7 +49,7 @@ const Header = () => {
                         User
                     </a>
                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <Link className="dropdown-item" to={`/profile`}>
+                        <Link className="dropdown-item" to={`/profile/${auth.user._id}`}>
                             Profile
                         </Link>
                         <Link className="dropdown-item" to="/">
