@@ -39,19 +39,19 @@ const Header = () => {
                         User
                     </a>
                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a className="dropdown-item" href="/">
+                        <Link className="dropdown-item" to={`/profile`}>
                             Profile
-                        </a>
-                        <a className="dropdown-item" href="/">
+                        </Link>
+                        <Link className="dropdown-item" to="/">
                             Dark mode
-                        </a>
+                        </Link>
                         <div className="dropdown-divider"></div>
-                        <a
+                        <Link
                             className="dropdown-item"
-                            href="/"
+                            to="/"
                         >
                             Logout
-                        </a>
+                        </Link>
                     </div>
                 </li>
             </ul>
