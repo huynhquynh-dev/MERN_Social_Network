@@ -1,5 +1,6 @@
 import { postDataAPI } from "../../utils/fetchData";
 import { GLOBAL_TYPE } from "./globalType";
+import valid from "../../utils/valid";
 
 export const login = (data) => async (dispatch) => {
   try {
@@ -20,6 +21,7 @@ export const login = (data) => async (dispatch) => {
     });
 
     localStorage.setItem("firstLogin", true);
+    
     dispatch({
       type: GLOBAL_TYPE.ALERT,
       payload: {
@@ -62,7 +64,15 @@ export const refreshToken = () => async (dispatch) => {
 };
 
 export const register = (data) => async (dispatch) => {
-  console.log(data)
+  const check = valid(data);
+  if (check.errorLength > 0){
+    console.log(check)
+    return dispatch({
+      type: GLOBAL_TYPE.ALERT,
+      payload: check.errorMessage
+    });
+  }
+
   try {
     dispatch({
       type: GLOBAL_TYPE.ALERT,
@@ -81,6 +91,7 @@ export const register = (data) => async (dispatch) => {
     });
 
     localStorage.setItem("firstLogin", true);
+
     dispatch({
       type: GLOBAL_TYPE.ALERT,
       payload: {
