@@ -107,3 +107,20 @@ export const register = (data) => async (dispatch) => {
     });
   }
 };
+
+export const logout = () => async (dispatch) => {
+  try {
+    
+    localStorage.removeItem("firstLogin");
+    await postDataAPI("logout");
+    window.location.href = '/'
+
+  } catch (error) {
+    dispatch({
+      type: GLOBAL_TYPE.ALERT,
+      payload: {
+        error: error.response.data.message,
+      },
+    });
+  }
+};

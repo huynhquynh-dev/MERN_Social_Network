@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../redux/actions/authAction";
 
 const Header = () => {
 
@@ -16,6 +17,9 @@ const Header = () => {
         if(pn === pathname)
             return 'active';
     }
+
+    const { auth } = useSelector((state) => state);
+    const dispatch = useDispatch();
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-between align-middle">
@@ -55,6 +59,7 @@ const Header = () => {
                         <Link
                             className="dropdown-item"
                             to="/"
+                            onClick={() => dispatch(logout())}
                         >
                             Logout
                         </Link>
