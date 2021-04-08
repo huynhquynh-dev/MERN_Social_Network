@@ -27,7 +27,7 @@ const Header = () => {
             <ul className="navbar-nav px-2 flex-row">
                 {navLinks.map((link, index) => (
                     <li className={`nav-item px-2 ${isActive(link.path)}`} key={index}>
-                        <Link className="nav-link active" to={link.path}>
+                        <Link className="nav-link" to={link.path}>
                             <span className="material-icons">{link.icon}</span>
                         </Link>
                     </li>
