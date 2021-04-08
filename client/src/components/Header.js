@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/actions/authAction";
+import { GLOBAL_TYPE } from "../redux/actions/globalType";
 
 const Header = () => {
 
@@ -18,7 +19,7 @@ const Header = () => {
             return 'active';
     }
 
-    const { auth } = useSelector((state) => state);
+    const { auth, theme } = useSelector((state) => state);
     const dispatch = useDispatch();
 
     return (
@@ -52,8 +53,10 @@ const Header = () => {
                         <Link className="dropdown-item" to={`/profile/${auth.user._id}`}>
                             Profile
                         </Link>
-                        
-                        <label htmlFor="theme" className="dropdown-item">Dark mode</label>
+
+                        <label htmlFor="theme" className="dropdown-item" onClick={() => dispatch({ type: GLOBAL_TYPE.THEME, payload: !theme})}>
+                            { theme ? "Light mode" : "Dark mode"}
+                        </label>
 
                         <div className="dropdown-divider"></div>
                         <Link
