@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import NotFound from './components/NotFound'
+import NotFound from '../components/NotFound'
 
 const PageRender = () => {
     const { page, id } = useParams()
@@ -16,7 +16,7 @@ const PageRender = () => {
 }
 
 const generatePage = (pageName) => {
-    const component = () => require(`./pages/${pageName}`).default
+    const component = () => require(`../pages/${pageName}`).default
     try {
         return React.createElement(component())
     } catch (error) {
