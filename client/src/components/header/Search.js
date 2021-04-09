@@ -1,11 +1,26 @@
-import React from 'react'
+import React, { useState } from "react";
 
 const Search = () => {
-    return (
-        <div>
-            Search
-        </div>
-    )
-}
+  const [search, setSearch] = useState();
 
-export default Search
+  return (
+    <form className="search-form">
+      <input
+        type="text"
+        name="search"
+        id="search"
+        value={search}
+        onChange={(e) =>
+          setSearch(e.target.value.toLowerCase().replace(/ /g, ''))
+        }
+      />
+      <div className="search-icon" style={{opacity: search ? 0 : 0.3}}>
+          <span className="material-icons">search</span>
+          <span>search</span>
+      </div>
+      <div className="close-search">&times;</div>
+    </form>
+  );
+};
+
+export default Search;

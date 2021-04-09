@@ -1,0 +1,36 @@
+.header .search-form{
+    position: relative;
+}
+
+.header .search-form #search{
+    background: #fafafa;
+    border: 1px solid #ddd; 
+    min-width: 250px;
+    width: 100%;
+    outline: none;
+    text-indent: 5px;
+    border-radius: 5px;
+}
+
+.header .search-form .search-icon{
+    position: absolute;
+    top: 50%;
+    left: 15%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    pointer-events: none;
+}
+
+.header .search-form .search-icon .material-icons{
+    font-size: 14px;
+    transform: translateY(3px);
+}
+
+.header .search-form .close-search{
+    position: absolute;
+    top: 0;
+    right: 5px;
+    cursor: pointer;
+    font-weight: 900;
+    color: crimson;
+}

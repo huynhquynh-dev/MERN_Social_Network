@@ -8,7 +8,7 @@ const Header = () => {
     return (
         <div className="header bg-light">
             <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-between align-middle">
-                <Link to="/">
+                <Link to="/" className="logo">
                     <h1 className="navbar-brand text-uppercase m-0 p-0">Qudispace</h1>
                 </Link>
 
