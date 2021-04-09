@@ -1,19 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import NotFound from '../components/NotFound'
-
-const PageRender = () => {
-    const { page, id } = useParams()
-    let pageName = ''
-
-    if (id) {
-        pageName = `${page}/[id]`
-    } else {
-        pageName = `${page}`
-    }
-
-    return generatePage(pageName)
-}
+import { useSelector } from 'react-redux'
 
 const generatePage = (pageName) => {
     const component = () => require(`../pages/${pageName}`).default
@@ -22,6 +10,23 @@ const generatePage = (pageName) => {
     } catch (error) {
         return <NotFound />
     }
+}
+
+const PageRender = () => {
+    const { page, id } = useParams()
+
+    const { auth } = useSelector(state => state)
+
+    let pageName = ""
+
+    if(auth.token){
+        if (id) {
+            pageName = `${page}/[id]`
+        } else {
+            pageName = `${page}`
+        }
+    }
+    return generatePage(pageName)
 }
 
 export default PageRender
