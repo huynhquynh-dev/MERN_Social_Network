@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/actions/authAction";
 import { GLOBAL_TYPE } from "../redux/actions/globalType";
+import Avatar from "./Avatar";
 
 const Header = () => {
 
@@ -47,7 +48,7 @@ const Header = () => {
                         aria-haspopup="true"
                         aria-expanded="false"
                     >
-                        <img src={auth.user.avatar} alt="avatar" className="avatar" style={{filter: `${theme ? 'invert(-1)' : 'invert(0)'}`}}/>
+                        <Avatar src={auth.user.avatar} />
                     </a>
                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                         <Link className="dropdown-item" to={`/profile/${auth.user._id}`}>
