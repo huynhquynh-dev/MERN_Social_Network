@@ -7,7 +7,7 @@ const PageRender = () => {
     let pageName = ''
 
     if (id) {
-        pageName = `${page}/${id}`
+        pageName = `${page}/[id]`
     } else {
         pageName = `${page}`
     }
