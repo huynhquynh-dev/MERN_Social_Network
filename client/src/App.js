@@ -9,7 +9,7 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import Home from "./pages/home";
 import Alert from "./components/alert/Alert";
-import Header from "./components/Header";
+import Header from "./components/header/Header";
 
 import { refreshToken } from "./redux/actions/authAction"
 
