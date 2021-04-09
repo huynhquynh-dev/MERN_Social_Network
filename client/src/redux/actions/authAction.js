@@ -65,13 +65,11 @@ export const refreshToken = () => async (dispatch) => {
 
 export const register = (data) => async (dispatch) => {
   const check = valid(data);
-  if (check.errorLength > 0){
-    console.log(check)
+  if (check.errorLength > 0)
     return dispatch({
       type: GLOBAL_TYPE.ALERT,
       payload: check.errorMessage
     });
-  }
 
   try {
     dispatch({
