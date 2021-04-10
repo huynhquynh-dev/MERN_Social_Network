@@ -3,7 +3,8 @@ const jwt = require("jsonwebtoken");
 
 const auth = async (req, res, next) => {
   try {
-    const token = req.headers("Authorization");
+    console.log(req)
+    const token = req.header("Authorization");
     if (!token)
       return res.status(400).json({ message: "Invalid authorization" });
 
@@ -11,7 +12,7 @@ const auth = async (req, res, next) => {
     if (!decode)
       return res.status(400).json({ message: "Invalid authorization" });
 
-    const user = await Users.findOne({_id: decode._id})
+    const user = await Users.findOne({_id: decode.id})
 
     req.user = user
     next()
