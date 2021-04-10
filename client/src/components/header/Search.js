@@ -40,11 +40,11 @@ const Search = () => {
       <div className="close-search">
         &times;
       </div>
-      <div className="close-search">
+      <div className="users">
         {
             users.map(user => (
               <Link key={user._id} to={`/profile/${user._id}`} >
-                <UserCard user={user}/>
+                <UserCard user={user} border="border"/>
               </Link>
             ))
         }
