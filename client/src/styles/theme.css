@@ -1,0 +1,7 @@
+#theme {
+  display: none;
+}
+
+#theme:checked ~ .App {
+  filter: invert();
+}

@@ -1,11 +1,11 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../redux/actions/authAction";
-import { GLOBAL_TYPE } from "../redux/actions/globalType";
+import { logout } from "../../redux/actions/authAction";
+import { GLOBAL_TYPE } from "../../redux/actions/globalType";
 import Avatar from "./Avatar";
 
-const Header = () => {
+const Menu = () => {
 
     const navLinks = [
         { label: "Home", icon: "home", path: "/" },
@@ -24,11 +24,6 @@ const Header = () => {
     const dispatch = useDispatch();
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-between align-middle">
-            <Link to="/">
-                <h1 className="navbar-brand text-uppercase m-0 p-0">Qudispace</h1>
-            </Link>
-
         <div className="menu">
             <ul className="navbar-nav px-2 flex-row">
                 {navLinks.map((link, index) => (
@@ -48,7 +43,7 @@ const Header = () => {
                         aria-haspopup="true"
                         aria-expanded="false"
                     >
-                        <Avatar src={auth.user.avatar} />
+                        <Avatar src={auth.user.avatar} size="medium-avatar" />
                     </a>
                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                         <Link className="dropdown-item" to={`/profile/${auth.user._id}`}>
@@ -71,8 +66,7 @@ const Header = () => {
                 </li>
             </ul>
         </div>
-        </nav>
-    );
-};
+    )
+}
 
-export default Header;
+export default Menu

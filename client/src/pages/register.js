@@ -4,7 +4,7 @@ import { useHistory, Link } from "react-router-dom";
 import { register } from "../redux/actions/authAction";
 
 const Register = () => {
-	const { auth, alert } = useSelector((state) => state);
+	const { auth, alert } = useSelector(state => state);
 	const dispatch = useDispatch();
 	const history = useHistory();
 
@@ -24,8 +24,7 @@ const Register = () => {
 		username,
 		email,
 		password,
-		confirmPassword,
-		gender 
+		confirmPassword
 	 } = userData;
 
 	const [typePass, setTypePass] = useState(false);
