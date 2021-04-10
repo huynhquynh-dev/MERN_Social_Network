@@ -19,6 +19,8 @@ const Search = () => {
         .catch((error) => {
           dispatch({type: GLOBAL_TYPE.ALERT, payload: {error: error.response.data.message}})
         });
+    } else {
+      setUsers([])
     }
   }, [search, auth.token, dispatch]);
 
@@ -47,8 +49,8 @@ const Search = () => {
       </div>
       <div className="users">
         {
-            users.map(user => (
-              <Link key={user._id} to={`/profile/${user._id}`} >
+            search && users.map(user => (
+              <Link key={user._id} to={`/profile/${user._id}`} onClick={handleCloseSearch} >
                 <UserCard user={user} border="border"/>
               </Link>
             ))
