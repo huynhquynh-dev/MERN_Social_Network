@@ -34,3 +34,13 @@
     font-weight: 900;
     color: crimson;
 }
+
+.header .search-form .users{
+    position: absolute;
+    width: 100px;
+    min-width: 250px;
+    background: #fafafa;
+    max-height: calc(100vh - 150px);
+    overflow: auto;
+    margin-top: 3px;
+}
