@@ -28,15 +28,15 @@ const Info = () => {
         <div>
             {
                 userData.map(user => (
-                    <div className="info-container" key={user._id}>
-                        <Avatar src={user.avatar} size="super-avatar" />
+                    <div className="info-container mt-4" key={user._id}>
+                        <Avatar src={user.avatar} size="supper-avatar" />
                         <div className="info-content">
                             <div className="info-content-title">
                                 <h2>{user.username}</h2>
                                 <button className="btn btn-outline-info">Edit profile</button>
                             </div>
                             <div className="info-content-body">
-                                <div className="follow-btn">
+                                <div className="follow-btn my-2">
                                     <span className="mr-4">
                                         { user.followers.length } Followers
                                     </span>
@@ -44,7 +44,7 @@ const Info = () => {
                                         { user.following.length } Following
                                     </span>
                                 </div>
-                                <h6>{user.fullname} {user.mobile}</h6>
+                                <h6>{user.fullname} - {user.mobile}</h6>
                                 <p className="m-0">{user.address}</p>
                                 <h6>{user.email}</h6>
                                 <a href={user.website} target="_blank" rel="noreferrer">
