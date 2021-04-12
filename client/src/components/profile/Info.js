@@ -53,13 +53,16 @@ const Info = () => {
                                         { user.following.length } Following
                                     </span>
                                 </div>
-                                <h6>{user.fullname} - {user.mobile}</h6>
-                                <p className="m-0">{user.address}</p>
-                                <h6>{user.email}</h6>
+                                <h6 className="my-2">
+                                    {user.fullname}
+                                    <span className="text-danger ml-4"> {user.mobile}</span>
+                                </h6>
+                                <p className="my-2">{user.address}</p>
+                                <h6 className="my-2">{user.email}</h6>
                                 <a href={user.website} target="_blank" rel="noreferrer">
                                     { user.website }
                                 </a>
-                                <p>{user.story}</p>
+                                <p className="mt-2">{user.story}</p>
                             </div>
                         </div>
                         {

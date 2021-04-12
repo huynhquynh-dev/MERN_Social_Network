@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { checkImage } from "../../utils/ImageUpload"
 import { GLOBAL_TYPE } from "../../redux/actions/globalType"
+import { updateProfileUser } from "../../redux/actions/profileAction";
 
 const EditProfile = ({ setOnEdit }) => {
   const initialState = {
@@ -15,7 +16,7 @@ const EditProfile = ({ setOnEdit }) => {
 
   const [userData, setUserData] = useState(initialState);
 
-  const { fullname, mobile, address, website, story } = userData;
+  const { fullname, mobile, address, website, story, gender } = userData;
 
   const [avatar, setAvatar] = useState("");
 
@@ -44,7 +45,7 @@ const EditProfile = ({ setOnEdit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(userData);
+    dispatch(updateProfileUser({userData, avatar, auth, setOnEdit}))
   };
 
   return (
@@ -160,7 +161,7 @@ const EditProfile = ({ setOnEdit }) => {
                 id="male"
                 name="gender"
                 value="male"
-                defaultChecked
+                checked = {gender === 'male'}
                 onChange={handleChangeInput}
               />
             </label>
@@ -171,6 +172,7 @@ const EditProfile = ({ setOnEdit }) => {
                 id="female"
                 name="gender"
                 value="female"
+                checked = {gender === 'female'}
                 onChange={handleChangeInput}
               />
             </label>
@@ -181,6 +183,7 @@ const EditProfile = ({ setOnEdit }) => {
                 id="other"
                 name="gender"
                 value="other"
+                checked = {gender === 'other'}
                 onChange={handleChangeInput}
               />
             </label>
