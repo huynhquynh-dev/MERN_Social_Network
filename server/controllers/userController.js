@@ -7,19 +7,19 @@ const userController = {
             .limit(10)
             .select("fullname username avatar");
 
-        res.json({users})
+            return res.json({users})
 
     } catch (error) {
-        return res.status(500).json({message: error.message})
+      return res.status(500).json({message: error.message})
     }
   },
   getUser: async (req, res) => {
     try {
       const user = await Users.findById(req.param.id).select("-password");
 
-      if(!user) return res.status(500).json({message: "User does not exist"})
+      if(!user) return res.status(400).json({message: "User does not exist"})
 
-      res.json({user})
+      return res.json({user})
 
     } catch (error) {
       return res.status(500).json({message: error.message})
