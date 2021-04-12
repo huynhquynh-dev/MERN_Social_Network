@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import Avatar from '../header/Avatar'
 
 import { getProfileUsers } from '../../redux/actions/profileAction'
+import EditProfile from './EditProfile'
 
 const Info = () => {
 
@@ -13,6 +14,7 @@ const Info = () => {
     const dispatch = useDispatch()
 
     const [userData, setUserData] = useState([])
+    const [onEdit, setOnEdit] = useState(false)
 
     useEffect(() => {
         if(id === auth.user._id){
@@ -33,7 +35,7 @@ const Info = () => {
                         <div className="info-content">
                             <div className="info-content-title">
                                 <h2>{user.username}</h2>
-                                <button className="btn btn-outline-info">Edit profile</button>
+                                <button className="btn btn-outline-info" onClick={() => setOnEdit(true)}>Edit profile</button>
                             </div>
                             <div className="info-content-body">
                                 <div className="follow-btn my-2">
@@ -53,6 +55,9 @@ const Info = () => {
                                 <p>{user.story}</p>
                             </div>
                         </div>
+                        {
+                            onEdit && <EditProfile user={user} setOnEdit={setOnEdit}/>
+                        }
                     </div>
                 ))
             }
