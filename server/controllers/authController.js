@@ -39,7 +39,7 @@ const authController = {
 
             await newUser.save()
 
-            res.json({
+            return res.json({
                 message: "Registered successfully",
                 access_token,
                 user: {
@@ -72,7 +72,7 @@ const authController = {
                 maxAge: 30*24*60*60*1000
             })
 
-            res.json({
+            return res.json({
                 message: "Login successfully",
                 access_token,
                 user: {
@@ -112,8 +112,8 @@ const authController = {
                     return res.status(400).json({message: "This does not exist"})
 
                 const access_token = createAccessToken({id: result.id})
-                
-                res.json({
+
+                return res.json({
                     access_token,
                     user
                 })
