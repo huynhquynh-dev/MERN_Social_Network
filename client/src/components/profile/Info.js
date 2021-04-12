@@ -4,11 +4,13 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import Avatar from '../header/Avatar'
 
+import { getProfileUsers } from '../../redux/actions/profileAction'
+
 const Info = () => {
 
-    const {id} = useParams()
-    const { auth } = useSelector(state => state)
-    const { dispatch } = useDispatch()
+    const { id } = useParams()
+    const { auth, profile } = useSelector(state => state)
+    const dispatch = useDispatch()
 
     const [userData, setUserData] = useState([])
 
@@ -16,9 +18,11 @@ const Info = () => {
         if(id === auth.user._id){
             setUserData([auth.user])
         } else {
-            setUserData([])
+            dispatch(getProfileUsers({users: profile.users, id, auth}))
+            const newUser = profile.users.filter(user => user._id === id)
+            setUserData(newUser)
         }
-    }, [id, auth.user])
+    }, [id, auth, dispatch, profile.users])
 
     return (
         <div>

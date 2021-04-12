@@ -21,7 +21,7 @@ export const login = (data) => async (dispatch) => {
     });
 
     localStorage.setItem("firstLogin", true);
-    
+
     dispatch({
       type: GLOBAL_TYPE.ALERT,
       payload: {
@@ -68,7 +68,7 @@ export const register = (data) => async (dispatch) => {
   if (check.errorLength > 0)
     return dispatch({
       type: GLOBAL_TYPE.ALERT,
-      payload: check.errorMessage
+      payload: check.errorMessage,
     });
 
   try {
@@ -108,11 +108,9 @@ export const register = (data) => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
   try {
-    
     localStorage.removeItem("firstLogin");
     await postDataAPI("logout");
-    window.location.href = '/'
-
+    window.location.href = "/";
   } catch (error) {
     dispatch({
       type: GLOBAL_TYPE.ALERT,

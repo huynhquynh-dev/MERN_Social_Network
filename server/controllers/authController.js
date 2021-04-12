@@ -112,7 +112,7 @@ const authController = {
                     return res.status(400).json({message: "This does not exist"})
 
                 const access_token = createAccessToken({id: result.id})
-                
+
                 return res.json({
                     access_token,
                     user
