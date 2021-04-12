@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { checkImage } from "../../utils/ImageUpload"
+import { GLOBAL_TYPE } from "../../redux/actions/globalType"
 
-const EditProfile = ({ user, setOnEdit }) => {
+const EditProfile = ({ setOnEdit }) => {
   const initialState = {
     fullname: "",
     mobile: "",
@@ -21,13 +23,23 @@ const EditProfile = ({ user, setOnEdit }) => {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+      setUserData(auth.user);
+  }, [auth.user])
+
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
   };
 
-  const changeAvatar = () => {
-    setAvatar();
+  const changeAvatar = (e) => {
+    const file = e.target.files[0]
+    const error = checkImage(file)
+
+    if(error) {
+        return dispatch({type: GLOBAL_TYPE.ALERT, payload: {error}})
+    }
+    setAvatar(file);
   };
 
   const handleSubmit = (e) => {

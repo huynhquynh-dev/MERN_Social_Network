@@ -6,6 +6,7 @@ import Avatar from '../header/Avatar'
 
 import { getProfileUsers } from '../../redux/actions/profileAction'
 import EditProfile from './EditProfile'
+import FollowButton from '../FollowButton'
 
 const Info = () => {
 
@@ -35,7 +36,13 @@ const Info = () => {
                         <div className="info-content">
                             <div className="info-content-title">
                                 <h2>{user.username}</h2>
-                                <button className="btn btn-outline-info" onClick={() => setOnEdit(true)}>Edit profile</button>
+                                {
+                                    user._id === auth.user._id 
+                                    ? 
+                                        <button className="btn btn-outline-info" onClick={() => setOnEdit(true)}>Edit profile</button>
+                                    :
+                                        <FollowButton />
+                                }
                             </div>
                             <div className="info-content-body">
                                 <div className="follow-btn my-2">
@@ -56,7 +63,7 @@ const Info = () => {
                             </div>
                         </div>
                         {
-                            onEdit && <EditProfile user={user} setOnEdit={setOnEdit}/>
+                            onEdit && <EditProfile setOnEdit={setOnEdit}/>
                         }
                     </div>
                 ))
