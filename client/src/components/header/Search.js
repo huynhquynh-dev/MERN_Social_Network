@@ -4,10 +4,12 @@ import { getDataAPI } from "../../utils/fetchData";
 import { GLOBAL_TYPE } from '../../redux/actions/globalType'
 import { Link } from 'react-router-dom'
 import UserCard from '../UserCard'
+import LoadIcon from '../../images/loading-circle.gif'
 
 const Search = () => {
   const [search, setSearch] = useState();
   const [users, setUsers] = useState([]);
+  const [load, setLoad] = useState(false);
 
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -35,12 +37,15 @@ const Search = () => {
       if(!search) return
 
       try {
+        setLoad(true)
         const res = await getDataAPI(`search?username=${search}`, auth.token)
         setUsers(res.data.users)
+        setLoad(false)
       } catch (error) {
         dispatch({type: GLOBAL_TYPE.ALERT, payload: {error: error.response.data.message}})
       }
   }
+  
 
   return (
     <form className="search-form" onSubmit={handleSearch}>
@@ -54,6 +59,8 @@ const Search = () => {
         }
       />
       <button type="submit" style={{display: 'none'}}>Search</button>
+
+      { load && <img className="loading-icon" src={LoadIcon} alt="loading" />}
 
       <div className="search-icon" style={{ opacity: search ? 0 : 0.3 }}>
         <span className="material-icons">search</span>
