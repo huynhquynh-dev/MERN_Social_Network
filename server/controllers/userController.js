@@ -10,9 +10,21 @@ const userController = {
         res.json({users})
 
     } catch (error) {
-        res.status(500).json({message: error.message})
+        return res.status(500).json({message: error.message})
     }
   },
+  getUser: async (req, res) => {
+    try {
+      const user = await Users.findById(req.param.id).select("-password");
+
+      if(!user) return res.status(500).json({message: "User does not exist"})
+
+      res.json({user})
+
+    } catch (error) {
+      return res.status(500).json({message: error.message})
+    }
+  }
 };
 
 module.exports = userController;
