@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getDataAPI } from "../../utils/fetchData";
 import { GLOBAL_TYPE } from '../../redux/actions/globalType'
-import { Link } from 'react-router-dom'
 import UserCard from '../UserCard'
 import LoadIcon from '../../images/loading-circle.gif'
 
@@ -72,9 +71,12 @@ const Search = () => {
       <div className="users">
         {
             search && users.map(user => (
-              <Link key={user._id} to={`/profile/${user._id}`} onClick={handleCloseSearch} >
-                <UserCard user={user} border="border"/>
-              </Link>
+              <UserCard 
+                key={user._id}
+                user={user} 
+                border="border"
+                handleCloseSearch={handleCloseSearch}  
+              />
             ))
         }
       </div>
