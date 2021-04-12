@@ -50,7 +50,7 @@ const userSchema = mongoose.Schema({
         maxlength: 200
     },
     website: {
-        style: String,
+        type: String,
         default: ''
     },
     followers: [
