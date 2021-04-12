@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getDataAPI } from "../../utils/fetchData";
 import { GLOBAL_TYPE } from '../../redux/actions/globalType'
@@ -12,25 +12,38 @@ const Search = () => {
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (search) {
-      getDataAPI(`search?username=${search}`, auth.token)
-        .then((res) => setUsers(res.data.users))
-        .catch((error) => {
-          dispatch({type: GLOBAL_TYPE.ALERT, payload: {error: error.response.data.message}})
-        });
-    } else {
-      setUsers([])
-    }
-  }, [search, auth.token, dispatch]);
+  // useEffect(() => {
+  //   if (search) {
+  //     getDataAPI(`search?username=${search}`, auth.token)
+  //       .then((res) => setUsers(res.data.users))
+  //       .catch((error) => {
+  //         dispatch({type: GLOBAL_TYPE.ALERT, payload: {error: error.response.data.message}})
+  //       });
+  //   } else {
+  //     setUsers([])
+  //   }
+  // }, [search, auth.token, dispatch]);
 
   const handleCloseSearch = () => {
     setSearch('')
     setUsers([])
   }
 
+  const handleSearch = async (e) => {
+      e.preventDefault()
+
+      if(!search) return
+
+      try {
+        const res = await getDataAPI(`search?username=${search}`, auth.token)
+        setUsers(res.data.users)
+      } catch (error) {
+        dispatch({type: GLOBAL_TYPE.ALERT, payload: {error: error.response.data.message}})
+      }
+  }
+
   return (
-    <form className="search-form">
+    <form className="search-form" onSubmit={handleSearch}>
       <input
         type="text"
         name="search"
@@ -40,6 +53,8 @@ const Search = () => {
           setSearch(e.target.value.toLowerCase().replace(/ /g, ""))
         }
       />
+      <button type="submit" style={{display: 'none'}}>Search</button>
+
       <div className="search-icon" style={{ opacity: search ? 0 : 0.3 }}>
         <span className="material-icons">search</span>
         <span>search</span>
